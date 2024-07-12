@@ -50,7 +50,7 @@
       margin-top: 20px;
     }
 
-    .chart-container, .heatmap-container, .dot-container {
+    .chart-container, .heatmap-container {
       border: 1px solid #ccc;
       padding: 10px;
       width: 615px;
@@ -147,13 +147,11 @@
 <div class="form-group">
   <button id="generate-pie-chart" class="btn-new">Generate Pie Chart</button>
   <button id="generate-heatmap" class="btn-new">Generate Heatmap</button>
-  <button id="generate-dot-graph" class="btn-new">Generate Dot Graph</button>
 </div>
 
 <div class="charts-container">
   <div class="chart-container hidden" id="pie-chart-container"></div>
   <div class="heatmap-container hidden" id="heatmap-container"></div>
-  <div class="dot-container hidden" id="dot-container"></div>
 </div>
 
 <div id="tooltip" class="tooltip"></div>
@@ -166,7 +164,7 @@
   const timeZoneOffsets = {
     'Europe/Vienna': 0,
     'Europe/London': -4,
-    'Europe/Bucharest': 4 
+    'Europe/Bucharest': 4
   };
 
 
@@ -756,34 +754,6 @@
   }
 
 
-  function loadXMLData() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'data.xml', true);
-    xhr.onload = function () {
-      if (xhr.status === 200) {
-        var xml = xhr.responseXML;
-        var data = parseXML(xml);
-
-        // Create the plot
-        var trace = {
-          x: data.map(d => d.start),
-          y: data.map(d => d.quantity),
-          mode: 'markers',
-          type: 'scatter',
-          marker: { size: 10, color: 'red' }
-        };
-
-        var layout = {
-          title: 'Energy Consumption Over Time',
-          xaxis: { title: 'Time', type: 'date' },
-          yaxis: { title: 'Energy Consumption (KWh)' }
-        };
-
-        Plotly.newPlot('dot-container', [trace], layout);
-      }
-    };
-    xhr.send();
-  }
 </script>
 </body>
 </html>
